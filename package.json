@@ -1,0 +1,40 @@
+{
+  "name": "sonata-lang",
+  "displayName": "sonata-lang",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.66.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "sonata",
+        "aliases": [
+          "sonata",
+          "sonata"
+        ],
+        "extensions": [
+          ".sonata",
+          ".sonata.html"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "sonata",
+        "scopeName": "source.sonata",
+        "path": "./syntaxes/sonata.tmLanguage.json",
+        "embeddedLanguages": {
+          "sonata-javascript": "javascript",
+          "sonata-html": "html",
+          "sonata-css": "css"
+        }
+      }
+    ]
+  }
+}

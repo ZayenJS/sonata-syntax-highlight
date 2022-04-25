@@ -1,0 +1,160 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "sonata",
+  "fileTypes": [".sonata", ".sonata.html"],
+  "patterns": [
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#strings-double"
+    },
+    {
+      "include": "#strings-single"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#sonata-html"
+    },
+    {
+      "include": "#sonata-js"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.sonata",
+          "match": "\\b(if|while|for|in|endfor|foreach|endforeach|else|elseif|elif|else if)\\b"
+        },
+        {
+          "name": "keyword",
+          "match": "\\b(set|block|endblock|extends)\\b"
+        },
+        {
+          "name": "comment",
+          "begin": "{#.*?",
+          "end": "#}"
+        },
+        {
+          "match": "{(@)\\s?(extends)\\s?(.*?)\\s?(@)}",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.tag.sonata"
+            },
+            "2": {
+              "name": "keyword.control.sonata"
+            },
+            "3": {
+              "name": "markup.underline"
+            },
+            "4": {
+              "name": "punctuation.definition.tag.sonata"
+            }
+          }
+        },
+        {
+          "match": "{(@)\\s?(block|endblock)\\s?(.*?)\\s?(@)}",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.tag.sonata"
+            },
+            "2": {
+              "name": "keyword.control.sonata"
+            },
+            "3": {
+              "name": "markup.bold"
+            },
+            "4": {
+              "name": "punctuation.definition.tag.sonata"
+            }
+          }
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.sonata",
+          "match": "\\d+"
+        }
+      ]
+    },
+    "strings-single": {
+      "patterns": [
+        {
+          "name": "string.quoted.single.sonata",
+          "begin": "'",
+          "end": "'"
+        }
+      ]
+    },
+    "strings-double": {
+      "name": "string.quoted.double.sonata",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.sonata",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "sonata-html": {
+      "patterns": [
+        {
+          "include": "#strings-double"
+        },
+        {
+          "include": "#strings-single"
+        },
+        {
+          "name": "punctuation.definition.tag.sonata",
+          "match": ">"
+        },
+        {
+          "name": "entity.name.tag.sonata",
+          "match": "(</?!?)\\w+",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.tag.sonata"
+            },
+            "2": {
+              "name": "entity.name.tag.sonata"
+            }
+          }
+        }
+      ]
+    },
+    "sonata-js": {
+      "patterns": [
+        {
+          "include": "#strings-double"
+        },
+        {
+          "include": "#strings-single"
+        },
+        {
+          "name": "comment.block.sonata",
+          "begin": "/\\*",
+          "end": "\\*/"
+        },
+        {
+          "name": "comment.line.double-slash.sonata",
+          "begin": "//",
+          "end": "$"
+        },
+        {
+          "name": "entity.name.method",
+          "match": "\\w+(?=\\()"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.sonata"
+}
