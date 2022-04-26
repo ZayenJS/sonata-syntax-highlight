@@ -3,43 +3,26 @@
   "name": "sonata",
   "fileTypes": [".sonata", ".sonata.html"],
   "patterns": [
-    {
-      "include": "#keywords"
-    },
-    {
-      "include": "#strings-double"
-    },
-    {
-      "include": "#strings-single"
-    },
-    {
-      "include": "#numbers"
-    },
-    {
-      "include": "#variables"
-    },
-    {
-      "include": "#sonata-html"
-    },
-    {
-      "include": "#sonata-js"
-    }
+    { "include": "#keywords" },
+    { "include": "#comments" },
+    { "include": "#functions" },
+    { "include": "#variables" },
+    { "include": "#sonata-html" },
+    { "include": "#sonata-js" },
+    { "include": "#strings-double" },
+    { "include": "#strings-single" },
+    { "include": "#numbers" }
   ],
   "repository": {
     "keywords": {
       "patterns": [
         {
           "name": "keyword.control.sonata",
-          "match": "\\b(if|while|for|in|endfor|foreach|endforeach|else|elseif|elif|else if)\\b"
+          "match": "\\b(if|while|for|in|endfor|foreach|as|endforeach|else|elseif|elif|else if)\\b"
         },
         {
           "name": "keyword",
           "match": "\\b(set|block|endblock|extends)\\b"
-        },
-        {
-          "name": "comment",
-          "begin": "{#.*?",
-          "end": "#}"
         },
         {
           "match": "{(@)\\s?(extends)\\s?(.*?)\\s?(@)}",
@@ -77,6 +60,40 @@
         }
       ]
     },
+    "functions": {
+      "patterns": [
+        {
+          "name": "entity.name.function",
+          "match": "([a-zA-Z0-9_]+)(?=\\()"
+        }
+      ],
+      "include": "#keywords"
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment",
+          "begin": "{#.*?",
+          "end": "#}"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other.sonata",
+          "match": "{{\\s?[a-zA-Z0-9_.]+\\s?}}"
+        },
+        {
+          "name": "variable.other.sonata",
+          "match": "[a-zA-Z0-9_]+\\s+(?=in|as)"
+        },
+        {
+          "name": "variable.other.sonata",
+          "match": "(?<=in|as)\\s+[a-zA-Z0-9_]+"
+        }
+      ]
+    },
     "numbers": {
       "patterns": [
         {
@@ -108,12 +125,6 @@
     "sonata-html": {
       "patterns": [
         {
-          "include": "#strings-double"
-        },
-        {
-          "include": "#strings-single"
-        },
-        {
           "name": "punctuation.definition.tag.sonata",
           "match": ">"
         },
@@ -128,6 +139,20 @@
               "name": "entity.name.tag.sonata"
             }
           }
+        },
+        {
+          "name": "entity.other.attribute-name.tag.sonata",
+          "match": "([a-zA-Z\\-])+(?=\\s?*=)"
+        },
+        {
+          "name": "entity.other.attribute-name.html.sonata",
+          "match": "\\w+(?=>)"
+        },
+        {
+          "include": "#strings-double"
+        },
+        {
+          "include": "#strings-single"
         }
       ]
     },
